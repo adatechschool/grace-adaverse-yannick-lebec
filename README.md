@@ -1,8 +1,10 @@
-# 🌐 Adaverse 2.0
+# 🌐 Adaverse
 
--   **Durée :** 2 semaines
--   **Type de projet :** groupe de 4
--   **Nom du repo :** `adaverse-2-[nom_github]`
+-   **Durée :** 2 semaine
+-   **Type de projet :** seul / pair programming
+-   **Nom du repo :** `adaverse-[nom_github]`
+
+[Lien Github Classroom](https://classroom.github.com/a/zZZEmCAB)
 
 ## 📦 Modalités de rendu
 
@@ -11,30 +13,42 @@ Vous pouvez développer sur la branche `main`, mais le projet devra être livré
 -   `stable` → version **complète avec toutes les fonctionnalités obligatoires**, **sans bonus**.
 -   `bonus` → version enrichie avec les **fonctionnalités bonus**.
 
-> ⚠️ **Important :** Vous devez avoir _poussé_ (`git push`) votre **dernier commit à minuit au plus tard à la date de rendu transmise**, afin qu’il soit pris en compte pour l’évaluation.
+> ⚠️ **Important :** Vous devez avoir _poussé_ (`git push`) votre **dernier commit la veille de la soutenance à minuit au plus tard**, afin qu’il soit pris en compte pour l’évaluation.
 
 ## 🎯 Objectif du projet
 
-Ce projet consiste à ajouter un système d'authentification au projet `adaverse`. Les utilisateur⋅ices non connecté⋅es pourront continuer à voir les projets sur le site, mais il faudra se connecter pour proposer un nouveau projet. Il sera également possible d'ajouter des projets en favoris et de laisser des commentaires sur les projets lorsqu'on est connecté⋅e. Enfin, les utilisateur⋅ices pourront avoir un rôle admin. Dans ce cas, iels pourront publier et dépublier les projets du site.
+Ce projet consiste à développer une **plateforme de visualisation de projets réalisés par les apprenant·e·s d’Ada**.
+Chaque projet sera classé par **catégorie**, correspondant à un **projet du programme Ada** (ex. : _Ada Quiz_, _Adaopte_, _Ada Check Events_, etc.).
+
+L’application sera **fullstack**, réalisée avec **Next.js**, **TailwindCSS** et **TypeScript**, et connectée à une base de données hébergée sur **Neon**, via l’ORM **Drizzle**.
+
+Les utilisateur·rice·s pourront **proposer un projet** via la page d’accueil, mais **seul·e le·la développeur·euse** de la plateforme pourra **valider et publier** les projets pour qu’ils apparaissent sur le site.
 
 ## 🧱 Stack technique (obligatoire)
 
-| Élément             | Technologie | Lien                                                               |
-| ------------------- | ----------- | ------------------------------------------------------------------ |
-| Framework fullstack | Next.js     | [https://nextjs.org/](https://nextjs.org/)                         |
-| Framework CSS       | TailwindCSS | [https://tailwindcss.com/](https://tailwindcss.com/)               |
-| ORM                 | Drizzle ORM | [https://orm.drizzle.team/](https://orm.drizzle.team/)             |
-| Base de données     | Neon        | [https://neon.com/](https://neon.com/)                             |
-| Langage             | TypeScript  | [https://www.typescriptlang.org/](https://www.typescriptlang.org/) |
-| Authentification    | Better Auth | [http://better-auth.com/](http://better-auth.com/)                 |
+| Élément             | Technologie | Lien                            |
+| ------------------- | ----------- | ------------------------------- |
+| Framework fullstack | Next.js     | https://nextjs.org/             |
+| Framework CSS       | TailwindCSS | https://tailwindcss.com/        |
+| ORM                 | Drizzle ORM | https://orm.drizzle.team/       |
+| Base de données     | Neon        | https://neon.com/               |
+| Langage             | TypeScript  | https://www.typescriptlang.org/ |
 
 ## ⚙️ Initialisation du projet
 
-La stack étant la même que dans le projet adaverse, tu peux y reprendre les instructions. On va juste y ajouter Better Auth, ce que tu peux faire en utilisant le guide **installer Better Auth**.
+Installe l'ensemble des dépendances en suivant les documentations officielles.
+
+Pour Next.js tu peux regarder cette section : https://nextjs.org/docs/app/getting-started/installation.
+
+> ⚠️ N'oublie pas de choisir tailwind et TypeScript pendant la configuration
+
+Pour Neon, crée un projet, récupère la "connection string" de la base de données et copie la dans ton `.env`.
+
+Enfin, pour Drizzle, tu peux suivre la documentation officielle pour Neon à [ce lien](https://orm.drizzle.team/docs/connect-neon) ou notre petit guide d'installation [ici](../../guides/installer-drizzle.md). Une fois la connection et le schéma créé, tu es prêt⋅e pour coder !
 
 ## 🚀 Déploiement
 
-Tu peux utiliser **[Vercel](https://vercel.com/)**, la plateforme officielle pour héberger les applications **Next.js**.
+Tu peux utiliser **[Vercel](https://vercel.com/)** la plateforme officielle pour héberger les applications **Next.js**.
 
 Attention, n'oublie pas de spécifier la variable d'environnement pour te connecter à Neon sur Vercel (la même que dans ton fichier `.env`).
 
@@ -49,73 +63,124 @@ Pour mener à bien ce projet, il est nécessaire de maîtriser :
 -   les bases du **React**
 -   les bases du **SQL**
 -   les bases du **développement backend**
--   l'utilisation d'une ORM
--   l'utilisation de Next.js
 
 ## 🧩 Fonctionnalités à développer
 
 > ⚠️ **Réalisez toutes les fonctionnalités obligatoires avant de passer aux bonus.**
 
-### 1 . Système d'authentification
+### 1. 🗂️ Conception de la base de données
 
-Le but de cette partie est d'ajouter le système d'authentification en utilisant Better Auth. Les utilisateur⋅ices doivent pouvoir créer un compte avec un email et un mot de passe, se connecter et se déconnecter.
+Cette partie se réalise avec **Drizzle ORM** en créant le schéma de la base de données.
 
--   [ ] créer une page avec un formulaire d'inscription (nom d'utilisateur⋅ice, email, mot de passe)
--   [ ] créer une page avec un formulaire de connexion (email et mot de passe)
--   [ ] configurer Better Auth (création du client `auth.ts` et des actions `signup`, `signin` et `signout`)
--   [ ] gérer les erreurs et états de chargement des formulaires
--   [ ] ajouter un bouton de déconnexion dans la barre de navigation lorsque l'utilisateur⋅ice est connecté⋅e, sinon mettre 2 liens vers signin et signup
--   [ ] depuis les pages d'inscription et connexion, si l'utilisateur⋅ice est connecté⋅e, iel doit être redirigé⋅e sur la page d'accueil automatiquement
+#### Tables à concevoir
 
-### 2. Les commentaires
+-   **Table des projets Ada**
 
-Le but de cette partie est d'ajouter des fonctionnalités qui manipulent des données liées aux utilisateur⋅ices.
+    -   Contient la liste des différents **projets du programme Ada**.
+    -   Chaque entrée correspond à un **type de projet officiel** (ex. : Adaopte, Ada Quiz…).
+    -   Elle doit inclure un identifiant unique et un **nom de projet** clair et distinct.
 
--   [ ] Lorsqu'un⋅e utilisateur⋅ice propose un projet, faire en sorte qu'il soit lié à son compte en base de données
--   [ ] Afficher le nom de l'utilisateur⋅ice qui l’a proposé dans la liste des projets et sur la page de détail du projet
--   [ ] Permettre à n'importe quelle personne connectée de poster un commentaire sur un projet.
+-   **Table des promotions Ada**
 
-    -   [ ] Les commentaires devront être sauvegardés en base de données
-    -   [ ] Les commentaires devront avoir un message ainsi qu'une date de publication
-    -   [ ] Les commentaires seront affichés sous la page de détail de chaque projet, du plus récent au plus ancien, avec leur date, leur auteur⋅ice et le message
-    -   [ ] Dans la liste des projets, on affichera le nombre total de commentaires
-    -   [ ] Les utilisateur⋅ices pourront supprimer et modifier **leurs propres** commentaires
+    -   Contient l’ensemble des **promotions d’apprenant·e·s**.
+    -   Chaque promo doit avoir un identifiant unique, un **nom** (ex. "Frida") et une **date de début**.
 
-### 3. Le rôle admin
+-   **Table des projets étudiantes / étudiants**
+    -   Représente les **projets réalisés par les apprenant·e·s** pour un projet Ada donné.
+    -   Chaque projet doit inclure :
+        -   un **titre** clair,
+        -   une **illustration** pour avoir un visuel du projet
+        -   un **slug** pour accéder à la ressource via une URL propre,
+        -   un **lien GitHub**,
+        -   un **lien vers la démo** en ligne,
+        -   une **date de création** (quand le projet est proposé),
+        -   une **date de publication** (vide tant que le projet n’est pas validé),
+        -   une **référence vers la promotion**,
+        -   une **référence vers le projet Ada** concerné.
 
-Dans cette partie, on va ajouter un rôle admin aux utilisateur⋅ices. Les fonctionnalités listées ci-dessous ne devront être accessibles qu’aux admin.
+### 2. 🌱 Création d’une seed de données
 
--   [ ] Supprimer un commentaire de n'importe quel⋅le utilisateur⋅ice
--   [ ] Créer une page qui liste **tous** les projets et qui permet de publier ou de désactiver la publication d'un projet (attention : si un⋅e utilisateur⋅ice n'est pas admin, iel devra être automatiquement redirigé⋅e vers l'accueil depuis cette page)
--   [ ] Bannir un⋅e utilisateur⋅ice
+Une **seed** permet d’ajouter des données de base dans la base de données.
 
-### 4. Mobile et accessibilité
+#### Tâches à réaliser
 
-Attention, votre site devra être utilisable sur mobile avec un design adapté.
+-   [ ] Créer un script `.sql` pour insérer les **promotions Ada**
+-   [ ] Créer un script `.sql` pour insérer les **projets Ada**
+-   [ ] Créer un script `.sql` permettant de **publier un projet** (en mettant à jour sa date de publication selon son identifiant)
 
-Les éléments utilisés devront également être accessibles (à minima avoir 100% dans les catégories Lighthouse accessibilité et best practices).
+### 3. 💻 Intégration sur le site
 
-## 💎 Bonus
+#### a. Formulaire de proposition de projet
 
--   Partage de projets sur les réseaux sociaux
--   Page de profil
--   Connexion et gestion de compte avec GitHub
--   Intégration d'une bibliothèque de validation (zod, valibot, arktype, etc.)
--   Système de favoris
--   Ajouter un système d'upload d’image
+-   [ ] Ajouter sur la page d’accueil `/` un **bouton "Proposer un projet"** dans le header.
+-   [ ] Le **bouton "Proposer un projet"** ouvre une **popup** contenant un **formulaire** permettant de :
+    -   saisir le titre du projet,
+    -   renseigner les liens GitHub et de démo,
+    -   choisir la promotion concernée,
+    -   choisir le projet Ada associé (via des menus déroulants).
+-   [ ] Attention, si le titre ou les liens de sont pas renseignés, le projet ne doit pas être créé et on doit afficher une erreur
+-   [ ] Lorsqu’un·e utilisateur·rice valide le formulaire :
+    -   le projet est enregistré dans la base de données avec toutes les informations saisies,
+    -   la **date de publication reste vide** tant qu’il n’a pas été validé.
 
-## 🚀 Bonus ++
+![](./project-dialog.png)
 
--   Système de recherche de projets (filtre, barre de recherche, "fulltext search")
--   Associer plusieurs utilisateur⋅ices à un projet
--   Bonus du projet `adaverse`
--   Soyez créatif⋅ves !
+#### b. Page d’accueil `/` : affichage des projets publiés
+
+-   [ ] Afficher sur la page d’accueil la **liste des projets publiés**, regroupés par projet Ada.
+-   [ ] Les projets doivent être récupérés depuis le backend et **triés par date de publication décroissante (le plus récent en premier)**.
+-   [ ] **Les projets non publiés (date vide)** ne doivent pas apparaître.
+-   [ ] Chaque carte de projet doit afficher :
+    -   le titre du projet,
+    -   la date de publication,
+    -   la promotion correspondante,
+    -   une image du projet :
+        -   automatiquement récupérée depuis le fichier `thumbnail.png` à la racine du repo GitHub (récupérée automatiquement avec l'url `https://github.com/<user>/<repo>/blob/main/thumbnail.png?raw=true`),
+        -   sinon, une **image par défaut** doit être affichée.
+
+![](./home.png)
+
+#### c. Page de détail d’un projet
+
+-   [ ] Cliquer sur un projet redirige vers une **page de détail**.
+-   [ ] Cette page doit afficher :
+    -   le titre du projet,
+    -   la promotion,
+    -   l’image du projet,
+    -   la date de publication,
+    -   le projet Ada associé.
+-   [ ] Elle doit également contenir un lien pour afficher la démo et un autre pour accéder au Github du projet
+-   [ ] Si on clique sur le logo, on doit revenir à la page d’accueil.
+
+![](./project-details.png)
+
+## 🚫 Ce que vous ne devez pas faire
+
+-   Aucune gestion de **connexion / inscription**
+-   Pas d’**upload d’images**
+-   Pas de **commentaires**
+-   Pas de **favoris**
+-   Pas d’**interface d’administration**
+
+## 💎 Bonus possibles
+
+-   Faire une vraie gestion d'erreur pour vérifier les liens github et de démo
+-   Récupérer des **informations GitHub** (ex. nombre d’étoiles, commits, contributeur·rice·s…) pour enrichir la page de détails.
+-   Ajouter des **filtres** et des **options de tri** avancées pour la recherche.
+-   Améliorer l’**accessibilité** du site.
+-   Ajouter un **dark mode** ou d’autres **paramètres de personnalisation**.
+-   Ajouter des **champs supplémentaires** aux projets pour enrichir les données affichées.
+-   Compléter la table des **projets Ada** avec des informations supplémentaires (stack utilisée, thème, description, etc.).
+-   Compter le nombre de vue par projet
+-   Faire un dashboard pour visualiser les vues
+-   Améliorer le **design global** : landing page, animations, transitions fluides, par exemple en intégrant ce design :
+
+![](./home-figma.png)
+![](./details-figma.png)
 
 ## ✅ Modalité d'évaluation
 
-### 🎤 Soutenance (20 minutes)
-
-L’évaluation se déroulera sous forme de soutenance. Chaque membre du groupe devra présenter une partie des fonctionnalités sur lesquelles iel a travaillé.
+L’évaluation se déroulera sous forme de soutenance. L'apprenante devra présenter une partie des fonctionnalités sur lesquelles iel a travaillé.
 
 Chaque personne devra être capable :
 
@@ -123,30 +188,40 @@ Chaque personne devra être capable :
 -   de réaliser une démonstration fonctionnelle,
 -   de naviguer aisément dans son code durant la présentation.
 
-Cette première partie durera **environ 3 minutes par personne**.
+Cette première partie durera **environ 10 minutes**.
 
-Ensuite, chaque membre du groupe répondra à **une à deux questions techniques**, afin de vérifier ses compétences (basées sur le référentiel _Compétences à acquérir_ ci-dessous).
-Cette phase durera **environ 2 minutes par personne**.
-
-### 💻 Démo (5 minutes)
-
-Le groupe devra préparer une **présentation complète du projet**, comprenant :
-
--   une démo fluide et représentative,
--   des slides clairs et synthétiques,
--   une explication des **choix techniques** effectués,
--   une mise en avant de l’**organisation du travail en équipe** (répartition des tâches, workflow Git, communication, etc.).
-
-L’objectif est de montrer votre compréhension globale du projet, autant sur le plan technique que sur le plan méthodologique.
-
-> ⚠️ Attention à bien répartir le temps de parole entre les 4 membres du groupe
+Ensuite, l'apprenante répondra à **des questions techniques**, afin de vérifier ses compétences (basées sur le référentiel _Compétences à acquérir_ ci-dessous).
+Cette phase durera **environ 5 minutes**.
 
 ## 🎓 Compétences à acquérir
 
--   [ ] Je sais créer un système de comptes utilisateur⋅ices avec email et mot de passe (signin, signup, signout)
--   [ ] Je sais utiliser les cookies pour sauvegarder une session utilisateur⋅ice
--   [ ] Je sais charger des données en fonction d'un compte utilisateur⋅ice connecté⋅e
--   [ ] Je sais protéger l'accès à certaines données si l'utilisateur⋅ice est connecté⋅e ou non
--   [ ] Je sais lier des données à un⋅e utilisateur⋅ice (commentaires, favoris)
--   [ ] Je sais gérer plusieurs rôles utilisateur⋅ices (user, admin)
--   [ ] Je sais effectuer des redirections entre les pages (par exemple, vers /auth/signin si l'utilisateur⋅ice n'est pas connecté⋅e)
+### Back / BDD
+
+-   [ ] Je sais intégrer et utiliser une ORM avec NextJS
+-   [ ] Je sais connecter mon ORM avec ma base de données
+-   [ ] Je sais créer une base de donnée à partir d'un schéma
+-   [ ] Je sais visualiser et modifier des données dans la base de données
+-   [ ] Je comprends le fonctionnement d'un ORM (mapping object relationnel)
+-   [ ] Je sais modéliser une base de données à partir d'un énoncé
+-   [ ] Je comprends les avantages et les inconvénients que l'ORM apporte
+-   [ ] J'arrive à implémenter mon ORM dans mon code
+-   [ ] Je sais récupérer des données venant de plusieurs tables avec l'ORM (foreign keys)
+-   [ ] Je sais faire un CRUD de ma donnée avec mon ORM
+-   [ ] Je sais créer des routes api et des composants serveur dans NextJS
+-   [ ] Je sais créer et exécuter des migrations
+-   [ ] Je sais créer et manipuler des forms actions
+
+### Front
+
+-   [ ] Je peux créer une page dans NextJS
+-   [ ] Je comprends l'utilité du `"use client"`
+-   [ ] Je comprends comment et quand utiliser useState et useEffect
+-   [ ] Je sais fetch des routes API depuis une page NextJS
+-   [ ] Je sais découper le code de mon projet en plusieurs fichiers
+-   [ ] Je comprends le système de routes de NextJS
+-   [ ] Je sais créer des routes dynamiques avec des paramètres d'URL
+-   [ ] Je sais récuperer le paramètre avec `params`
+-   [ ] Je sais comment utiliser `Link` pour naviguer entre les pages côté client
+-   [ ] Je sais faire la différence entre une route statique et dynamique
+-   [ ] Je sais appliquer du style à mes composants avec tailwind
+-   [ ] Je sais créer un dialogue

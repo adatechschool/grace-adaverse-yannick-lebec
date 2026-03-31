@@ -1,100 +1,74 @@
 'use client';
 
-import { useActionState, useEffect, useState, startTransition } from 'react';
-import { createProject, FormState } from '@/app/actions/createProject';
+import { useState, useActionState } from 'react';
+import { createProject, FormState } from '../actions/createProject';
 
-type Promotion = { id: number; name: string };
-type AdaProject = { id: number; name: string };
+type Props = {
+  promotions: { id: number; name: string }[];
+  adaProjects: { id: number; name: string }[];
+};
 
-const initialState: FormState = {};
-
-export default function ProposeProjectDialog({
-  promotions,
-  adaProjects,
-}: {
-  promotions: Promotion[];
-  adaProjects: AdaProject[];
-}) {
+export default function ProposeProjectDialog({ promotions, adaProjects }: Props) {
   const [open, setOpen] = useState(false);
-  const [state, formAction, pending] = useActionState(createProject, initialState);
-  const [formKey, setFormKey] = useState(0);
-
-  // Ferme la popup et réinitialise le formulaire si succès
-  useEffect(() => {
-    if (state.success) {
-      startTransition(() => {
-        setOpen(false);
-        setFormKey((k) => k + 1);
-      });
-    }
-  }, [state.success]);
+  const [state, action] = useActionState<FormState, FormData>(createProject, {});
 
   return (
     <>
       <button
         onClick={() => setOpen(true)}
-        className="bg-black text-white text-sm px-4 py-2 rounded-lg hover:bg-gray-800 transition-colors"
+        className="px-4 py-2 bg-black text-white text-sm rounded hover:bg-gray-800"
       >
         Proposer un projet
       </button>
 
       {open && (
-        <div
-          className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
-          onClick={(e) => { if (e.target === e.currentTarget) setOpen(false); }}
-        >
-          <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-xl">
-            <div className="flex items-center justify-between mb-6">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+          <div className="bg-white rounded-lg p-6 w-full max-w-md shadow-xl">
+            <div className="flex items-center justify-between mb-4">
               <h2 className="text-lg font-semibold">Proposer un projet</h2>
-              <button
-                onClick={() => setOpen(false)}
-                className="text-gray-400 hover:text-gray-600 text-xl leading-none"
-              >
-                ✕
-              </button>
+              <button type='button' onClick={() => setOpen(false)} >❌</button>
             </div>
 
-            {/* key={formKey} réinitialise le formulaire après succès */}
-            <form key={formKey} action={formAction} className="flex flex-col gap-4">
-              <div className="flex flex-col gap-1">
-                <label className="text-sm font-medium">Titre *</label>
+            
+
+            {state.error && <p className="text-red-600 text-sm">{state.error}</p>}
+            {state.success && <p className="text-green-600 text-sm">Projet envoyé !</p>}
+
+            <form action={action} className="flex flex-col gap-4">
+              <div>
+                <label className="block text-sm font-medium mb-1">Titre *</label>
                 <input
+                  type="text"
                   name="title"
-                  placeholder="Mon super projet"
                   required
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                  className="w-full border rounded px-3 py-2 text-sm"
                 />
               </div>
 
-              <div className="flex flex-col gap-1">
-                <label className="text-sm font-medium">Lien GitHub *</label>
+              <div>
+                <label className="block text-sm font-medium mb-1">URL GitHub *</label>
                 <input
+                  type="url"
                   name="githubUrl"
-                  type="url"
-                  placeholder="https://github.com/user/repo"
                   required
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                  className="w-full border rounded px-3 py-2 text-sm"
                 />
               </div>
 
-              <div className="flex flex-col gap-1">
-                <label className="text-sm font-medium">Lien démo *</label>
+              <div>
+                <label className="block text-sm font-medium mb-1">URL Démo *</label>
                 <input
-                  name="demoUrl"
                   type="url"
-                  placeholder="https://mon-projet.vercel.app"
+                  name="demoUrl"
                   required
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
+                  className="w-full border rounded px-3 py-2 text-sm"
                 />
               </div>
 
-              <div className="flex flex-col gap-1">
-                <label className="text-sm font-medium">Promotion</label>
-                <select
-                  name="promotionId"
-                  required
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
-                >
+              <div>
+                <label className="block text-sm font-medium mb-1">Promotion *</label>
+                <select name="promotionId" required className="w-full border rounded px-3 py-2 text-sm">
+                  <option value="">Choisir une promotion</option>
                   {promotions.map((p) => (
                     <option key={p.id} value={p.id}>
                       {p.name}
@@ -103,13 +77,10 @@ export default function ProposeProjectDialog({
                 </select>
               </div>
 
-              <div className="flex flex-col gap-1">
-                <label className="text-sm font-medium">Projet Ada</label>
-                <select
-                  name="adaProjectId"
-                  required
-                  className="border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-black"
-                >
+              <div>
+                <label className="block text-sm font-medium mb-1">Projet Ada *</label>
+                <select name="adaProjectId" required className="w-full border rounded px-3 py-2 text-sm">
+                  <option value="">Choisir un projet Ada</option>
                   {adaProjects.map((p) => (
                     <option key={p.id} value={p.id}>
                       {p.name}
@@ -118,18 +89,22 @@ export default function ProposeProjectDialog({
                 </select>
               </div>
 
-              {/* Message d'erreur */}
-              {state.error && (
-                <p className="text-red-500 text-sm">{state.error}</p>
-              )}
-
-              <button
-                type="submit"
-                disabled={pending}
-                className="bg-black text-white rounded-lg py-2 text-sm font-medium hover:bg-gray-800 transition-colors disabled:opacity-50 mt-2"
-              >
-                {pending ? 'Envoi en cours...' : 'Proposer le projet'}
-              </button>
+              <div className="flex justify-end gap-2 mt-2">
+                <button
+                  type="button"
+                  onClick={() => setOpen(false)}
+                  className="px-4 py-2 text-sm border rounded hover:bg-gray-100"
+                >
+                  Annuler
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 text-sm bg-black text-white rounded hover:bg-gray-800"
+                >
+                  Envoyer
+                </button>
+              </div>
+              <p className=' text-red-600'>* tous les champs sont obligatoires </p>
             </form>
           </div>
         </div>

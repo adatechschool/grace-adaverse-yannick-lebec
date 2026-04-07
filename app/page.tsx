@@ -1,3 +1,5 @@
+export const dynamic = 'force-dynamic';
+
 import { db } from '@/src/db/db';
 import { studentProjects, promotions, adaProjects } from '@/src/db/schema';
 import { eq, isNotNull, desc } from 'drizzle-orm';

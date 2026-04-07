@@ -2,7 +2,6 @@ import { db } from '@/src/db/db';
 import { studentProjects, promotions, adaProjects } from '@/src/db/schema';
 import { eq } from 'drizzle-orm';
 import Image from 'next/image';
-import Link from 'next/link';
 import { notFound } from 'next/navigation';
 
 function getThumbnailUrl(githubUrl: string): string {
@@ -11,7 +10,7 @@ function getThumbnailUrl(githubUrl: string): string {
     const parts = url.pathname.split('/').filter(Boolean);
     if (parts.length >= 2) {
       const [user, repo] = parts;
-      return `https://github.com/${user}/${repo}/blob/main/thumbnail.png?raw=true`;
+      return `https://opengraph.githubassets.com/1/${user}/${repo}`;
     }
   } catch {}
   return '';

@@ -20,7 +20,7 @@ function getThumbnailUrl(githubUrl: string): string {
     const parts = url.pathname.split('/').filter(Boolean);
     if (parts.length >= 2) {
       const [user, repo] = parts;
-      return `https://github.com/${user}/${repo}/blob/main/thumbnail.png?raw=true`;
+      return `https://opengraph.githubassets.com/1/${user}/${repo}`;
     }
   } catch {}
   return '';

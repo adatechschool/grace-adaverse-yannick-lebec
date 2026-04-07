@@ -1,19 +1,19 @@
 import { pgTable, serial, text, timestamp } from 'drizzle-orm/pg-core';
 
-// Table 1 : les types de projets officiels Ada (ex: Adaopte, Ada Quiz...)
+
 export const adaProjects = pgTable('ada_projects', {
   id: serial('id').primaryKey(),
   name: text('name').notNull().unique(),
 });
 
-// Table 2 : les promotions d'apprenants
+
 export const promotions = pgTable('promotions', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
   startDate: timestamp('start_date').notNull(),
 });
 
-// Table 3 : les projets réalisés par les étudiants
+
 export const studentProjects = pgTable('student_projects', {
   id: serial('id').primaryKey(),
   title: text('title').notNull(),

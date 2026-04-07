@@ -1,7 +1,8 @@
-import Link from 'next/link';
-import { db } from '@/src/db/db';
-import { promotions, adaProjects } from '@/src/db/schema';
-import ProposeProjectDialog from '@/app/components/ProposeProjectDialog';
+import Link from "next/link";
+import Image from "next/image";
+import { db } from "@/src/db/db";
+import { promotions, adaProjects } from "@/src/db/schema";
+import ProposeProjectDialog from "@/app/components/ProposeProjectDialog";
 
 export default async function Navbar() {
   // Fetch les données nécessaires aux menus déroulants du formulaire
@@ -15,7 +16,7 @@ export default async function Navbar() {
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo — clique ramène à l'accueil */}
         <Link href="/" className="text-xl font-bold tracking-tight">
-          Adaverse
+          <Image src="/logo.png" alt="Ada Logo" width={100} height={40} style={{ width: '100px', height: '60px' }} />
         </Link>
 
         {/* Le dialog gère lui-même l'ouverture/fermeture et le formulaire */}

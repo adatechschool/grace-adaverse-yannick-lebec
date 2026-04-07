@@ -40,7 +40,8 @@ export default function ProjectCard({ project }: Props) {
             src={thumbnailUrl}
             alt={project.title}
             fill
-            className="object-cover"
+            className="object-contain"
+            loading="eager"
             unoptimized
           />
         ) : (

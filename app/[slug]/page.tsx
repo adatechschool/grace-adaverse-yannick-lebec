@@ -51,7 +51,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             src={thumbnailUrl}
             alt={project.title}
             fill
-            className="object-cover"
+            className="object-contain"
             unoptimized
           />
         ) : (

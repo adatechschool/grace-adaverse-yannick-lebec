@@ -8,15 +8,17 @@ export default async function Home() {
     .select({
       id: studentProjects.id,
       title: studentProjects.title,
+      slug: studentProjects.slug,
       githubUrl: studentProjects.githubUrl,
       demoUrl: studentProjects.demoUrl,
+      publishedAt: studentProjects.publishedAt,
       promotionName: promotions.name,
       adaProjectName: adaProjects.name,
     })
     .from(studentProjects)
     .innerJoin(promotions, eq(studentProjects.promotionId, promotions.id))
     .innerJoin(adaProjects, eq(studentProjects.adaProjectId, adaProjects.id))
-    // .where(isNotNull(studentProjects.publishedAt))
+    .where(isNotNull(studentProjects.publishedAt))
     .orderBy(desc(studentProjects.createdAt));
 
   return (

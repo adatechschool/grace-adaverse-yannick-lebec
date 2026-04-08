@@ -30,8 +30,9 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col bg-white dark:bg-gray-950 dark:text-white">
           <Navbar />
-          {children}
+          {children}  
         </body>
+          
     </html>
   );
 }

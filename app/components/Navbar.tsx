@@ -3,6 +3,7 @@ import Image from "next/image";
 import { db } from "@/src/db/db";
 import { promotions, adaProjects } from "@/src/db/schema";
 import ProposeProjectDialog from "@/app/components/ProposeProjectDialog";
+import DarkModeToggle from "@/app/components/DarkModeToggle";
 
 export default async function Navbar() {
   // Fetch les données nécessaires aux menus déroulants du formulaire
@@ -12,7 +13,7 @@ export default async function Navbar() {
   ]);
 
   return (
-    <nav className="border-b border-gray-200 bg-white">
+    <nav className="border-b border-gray-200 bg-white dark:bg-gray-900 dark:border-gray-700">
       <div className="max-w-5xl mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo — clique ramène à l'accueil */}
         <Link href="/" className="text-xl font-bold tracking-tight">
@@ -20,10 +21,13 @@ export default async function Navbar() {
         </Link>
 
         {/* Le dialog gère lui-même l'ouverture/fermeture et le formulaire */}
-        <ProposeProjectDialog
-          promotions={promotionsList}
-          adaProjects={adaProjectsList}
-        />
+        <div className="flex items-center gap-3">
+          <DarkModeToggle />
+          <ProposeProjectDialog
+            promotions={promotionsList}
+            adaProjects={adaProjectsList}
+          />
+        </div>
       </div>
     </nav>
   );

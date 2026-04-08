@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import Image from 'next/image';
 
 type Props = {
   project: {
@@ -33,16 +32,14 @@ export default function ProjectCard({ project }: Props) {
     : '';
 
   return (
-    <Link href={`/${project.slug}`} className="border rounded-lg overflow-hidden flex flex-col hover:shadow-md transition-shadow">
-      <div className="relative w-full h-40 bg-gray-100">
+    <Link href={`/${project.slug}`} className="border rounded-lg overflow-hidden flex flex-col hover:shadow-md transition-shadow dark:border-gray-700 dark:bg-gray-800">
+      <div className="relative w-full h-40 bg-gray-100 dark:bg-gray-700">
         {thumbnailUrl ? (
-          <Image
+          // eslint-disable-next-line @next/next/no-img-element
+          <img
             src={thumbnailUrl}
             alt={project.title}
-            fill
-            className="object-contain"
-            loading="eager"
-            unoptimized
+            className="w-full h-full object-contain"
           />
         ) : (
           <div className="w-full h-full flex items-center justify-center text-gray-400 text-sm">
@@ -51,8 +48,8 @@ export default function ProjectCard({ project }: Props) {
         )}
       </div>
       <div className="p-4 flex flex-col gap-1 flex-1">
-        <h3 className="font-semibold">{project.title}</h3>
-        <p className="text-sm text-gray-500">{project.promotionName} · {project.adaProjectName}</p>
+        <h3 className="font-semibold dark:text-white">{project.title}</h3>
+        <p className="text-sm text-gray-500 dark:text-gray-400">{project.promotionName} · {project.adaProjectName}</p>
         {publishedDate && <p className="text-xs text-gray-400 mt-auto pt-2">{publishedDate}</p>}
       </div>
     </Link>

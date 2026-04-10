@@ -33,7 +33,7 @@ export async function createProject(
     return { error: 'Le titre et les deux liens sont obligatoires.' };
   }
 
-  // Génération d'un slug unique : titre slugifié + timestamp pour éviter les doublons
+  
   const slug = `${slugify(title)}-${Date.now()}`;
 
   try {

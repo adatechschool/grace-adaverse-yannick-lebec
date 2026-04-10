@@ -25,6 +25,7 @@ export default async function Home() {
 
   return (
     <main className="max-w-5xl mx-auto px-4 py-10">
+      <p className=' text-2xl mb-4'>voici les projets réalisé à la ADA TECH SCHOOL :</p>
   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
     {projects.map((project) => (
       <ProjectCard key={project.id} project={project} />

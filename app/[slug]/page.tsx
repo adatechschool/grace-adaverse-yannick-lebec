@@ -44,14 +44,14 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
     : '';
 
   return (
-    <main className="max-w-2xl mx-auto px-4 py-10">
-      <div className="relative w-full h-64 bg-gray-100 rounded-lg overflow-hidden mb-6">
+    <main className="w-full px-8 py-10 text-center">
+      <div className="relative w-full bg-gray-100 rounded-lg overflow-hidden mb-6" style={{ height: '500px' }}>
         {thumbnailUrl ? (
           <Image
             src={thumbnailUrl}
             alt={project.title}
             fill
-            className="object-contain"
+            className=" h-full"
             unoptimized
           />
         ) : (
@@ -65,7 +65,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       <p className="text-gray-500 mb-1">{project.promotionName} · {project.adaProjectName}</p>
       {publishedDate && <p className="text-sm text-gray-400 mb-6">Publié le {publishedDate}</p>}
 
-      <div className="flex gap-4">
+      <div className="flex gap-4 justify-center">
         <a
           href={project.githubUrl}
           target="_blank"

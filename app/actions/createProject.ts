@@ -28,7 +28,7 @@ export async function createProject(
   const promotionId = Number(formData.get('promotionId'));
   const adaProjectId = Number(formData.get('adaProjectId'));
 
-  // Validation : titre et liens obligatoires
+  
   if (!title?.trim() || !githubUrl?.trim() || !demoUrl?.trim()) {
     return { error: 'Le titre et les deux liens sont obligatoires.' };
   }
